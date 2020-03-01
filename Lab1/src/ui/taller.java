@@ -3,8 +3,23 @@
 Oscar Bejarano*/
 import java.util.Scanner;
 import java.io.IOException;
+import java.util.Arrays;
 
+/**
+ * This class contains the code of lab1
+ *
+ * @author oscar andres bejarano castro
+ */
 public class taller {
+
+    public static String[] arrayResult;
+    public static int[] arrayNum1;
+    public static int[] arrayNum2;
+    public static int[] arrayNum3;
+    public static int largoA = 0;
+    public static int[] arrayTemp16;
+    public static int[] arrayTemp17;
+    public static int[] arrayTemp10;
 
     public static void main(String args[]) throws InterruptedException {
 
@@ -19,9 +34,7 @@ public class taller {
         double division = 0, residuo = 0;
         int entero1 = 0, entero2 = 0;
         int largoA = 0;
-        int[] arrayNum1 = new int[largoA];
-        int[] arrayNum2 = new int[largoA];
-        int[] arrayNum3 = new int[largoA];
+
         boolean arrayCreado = false;
 
         // genero un ciclo con el menu
@@ -173,7 +186,7 @@ public class taller {
                     case 9:
                         limpiar();
                         if (arrayCreado) {
-                            for (int i = 0; i < largoA + largoA + 18; i++) {
+                            for (int i = 0; i < largoA + largoA + 19; i++) {
                                 System.out.print("*");
                                 Thread.sleep(100);
                             }
@@ -205,8 +218,10 @@ public class taller {
                             System.out.println("error, debe primero crear los arreglos en el punto 8");
                         }
                         break;
+                    //////////////////////////////////////////////////////////////////////////////
                     case 10:
                         limpiar();
+                        arrayTemp10 = new int[largoA];
                         if (arrayCreado) {
                             int seleccionA = 0;
                             int promedioA = 0;
@@ -218,6 +233,8 @@ public class taller {
                                         promedioA = arrayNum1[i] + promedioA;
                                     }
                                     promedioA = promedioA / largoA;
+                                    System.arraycopy(arrayNum1, 0, arrayTemp10, 0, largoA);
+                                    //double g=promedio();
                                     System.out.println("El promedio de los numeros del arreglo es de " + promedioA);
                                     break;
 
@@ -290,42 +307,77 @@ public class taller {
                         limpiar();
                         if (arrayCreado) {
                             int seleccionA = 0;
+                            int seleccionO = 0;
                             int mayorNumA = 0;
-                            System.out.println("digite el numero de que arreglo desea ultilizar (Arreglo 1 = 1  Arreglo 2 = 2   Arreglo 3= 3)");
+                            int[] arrayTemp = new int[largoA];
+                            int[] arrayTemp2 = new int[largoA];
+                            int[] arrayResult = new int[largoA];
+                            System.out.println("digite el numero de que arreglo desea ultilizar primero (Arreglo 1 = 1  Arreglo 2 = 2   Arreglo 3 = 3)");
                             seleccionA = lector.nextInt();
                             switch (seleccionA) {
                                 case 1:
-                                    mayorNumA = arrayNum1[0];
                                     for (int i = 0; i < largoA; i++) {
-                                        if (arrayNum1[i] > mayorNumA) {
-                                            mayorNumA = arrayNum1[i];
-                                        }
+                                        arrayTemp[i] = arrayNum1[i];
                                     }
-
-                                    System.out.println("El numero de mayor valor del arreglo es de " + mayorNumA);
                                     break;
 
                                 case 2:
-                                    mayorNumA = arrayNum2[0];
                                     for (int i = 0; i < largoA; i++) {
-                                        if (arrayNum2[i] > mayorNumA) {
-                                            mayorNumA = arrayNum2[i];
-                                        }
+                                        arrayTemp[i] = arrayNum2[i];
                                     }
-
-                                    System.out.println("El numero de mayor valor del arreglo es de " + mayorNumA);
                                     break;
 
                                 case 3:
-                                    mayorNumA = arrayNum3[0];
                                     for (int i = 0; i < largoA; i++) {
-                                        if (arrayNum3[i] > mayorNumA) {
-                                            mayorNumA = arrayNum3[i];
-                                        }
+                                        arrayTemp[i] = arrayNum3[i];
                                     }
-
-                                    System.out.println("El numero de mayor valor del arreglo es de " + mayorNumA);
                                     break;
+                            }
+                            System.out.println("digite el numero de que arreglo desea ultilizar de segundo (Arreglo 1 = 1  Arreglo 2 = 2   Arreglo 3 = 3)");
+                            seleccionA = lector.nextInt();
+                            switch (seleccionA) {
+                                case 1:
+                                    for (int i = 0; i < largoA; i++) {
+                                        arrayTemp2[i] = arrayNum1[i];
+                                    }
+                                    break;
+
+                                case 2:
+                                    for (int i = 0; i < largoA; i++) {
+                                        arrayTemp2[i] = arrayNum2[i];
+                                    }
+                                    break;
+
+                                case 3:
+                                    for (int i = 0; i < largoA; i++) {
+                                        arrayTemp2[i] = arrayNum3[i];
+                                    }
+                                    break;
+                            }
+                            System.out.println("digite el numero de que operacion desea ultilizar (suma = 1  resta = 2   multiplicacion = 3)");
+                            seleccionO = lector.nextInt();
+                            switch (seleccionA) {
+                                case 1:
+                                    for (int i = 0; i < largoA; i++) {
+                                        arrayResult[i] = arrayTemp[i] + arrayTemp2[i];
+                                    }
+                                    break;
+
+                                case 2:
+                                    for (int i = 0; i < largoA; i++) {
+                                        arrayResult[i] = arrayTemp[i] - arrayTemp2[i];
+                                    }
+                                    break;
+
+                                case 3:
+                                    for (int i = 0; i < largoA; i++) {
+                                        arrayResult[i] = arrayTemp[i] * arrayTemp2[i];
+                                    }
+                                    break;
+                            }
+                            System.out.println("El arreglo resultante de la operacion de las dos cadenas es: ");
+                            for (int i = 0; i < largoA; i++) {
+                                System.out.print(arrayResult[i] + " ");
                             }
                         } else {
                             System.out.println("error, debe primero crear los arreglos en el punto 8");
@@ -333,24 +385,271 @@ public class taller {
                         break;
                     case 13:
 
+                        if (arrayCreado) {
+                            int[] arrayTemp = new int[largoA * 3];
+                            for (int i = 0; i < largoA; i++) {
+                                arrayTemp[i] = arrayNum1[i];
+                            }
+                            int k = 0;
+                            for (int i = largoA; i < largoA * 2; i++) {
+                                arrayTemp[i] = arrayNum2[k];
+                                k++;
+                            }
+                            k = 0;
+                            for (int i = largoA * 2; i < largoA * 3; i++) {
+                                arrayTemp[i] = arrayNum3[k];
+                                k++;
+                            }
+                            for (int i = 0; i < largoA * 3; i++) {
+                                System.out.print(arrayTemp[i] + " ");
+                            }
+                        } else {
+                            System.out.println("error, debe primero crear los arreglos en el punto 8");
+                        }
                         break;
                     case 14:
-
+                        arrayResult = new String[largoA * 3];
+                        limpiar();
+                        if (arrayCreado) {
+                            unirArray();
+                            noRepetir();
+                            for (int i = 0; i <= largoA - 1; i++) {
+                                if (arrayResult[i] != "") {
+                                    System.out.println(arrayResult[i]);
+                                }
+                            }
+                        } else {
+                            System.out.println("error, debe primero crear los arreglos en el punto 8");
+                        }
                         break;
                     case 15:
-
+                        arrayResult = new String[largoA * 3];
+                        limpiar();
+                        if (arrayCreado) {
+                            unirArray();
+                            siRepetir();
+                            for (int i = 0; i <= largoA - 1; i++) {
+                                if (arrayResult[i] != "") {
+                                    System.out.println(arrayResult[i]);
+                                }
+                            }
+                        } else {
+                            System.out.println("error, debe primero crear los arreglos en el punto 8");
+                        }
                         break;
                     case 16:
+                        limpiar();
+                        arrayTemp16 = new int[largoA];
+                        int n = 0;
+                        if (arrayCreado) {
+                            int seleccionA = 0;
+                            System.out.println("digite el numero de que arreglo desea ultilizar (Arreglo 1 = 1  Arreglo 2 = 2   Arreglo 3= 3)");
+                            seleccionA = lector.nextInt();
+                            System.out.println("digite el numero de espacios que desea rotar");
+                            n = lector.nextInt();
+                            switch (seleccionA) {
+                                case 1:
+                                    System.arraycopy(arrayNum1, 0, arrayTemp16, 0, largoA);
+                                    int arrayTemp162[] = rotarArray(n);
+                                    System.out.print("el resultado de girar " + n + " posiciones el arreglo es de: ");
+                                    for (int i = 0; i < largoA; i++) {
+                                        System.out.print(arrayTemp162[i] + " ");
+                                    }
+                                    System.out.println("");
+                                    break;
 
+                                case 2:
+                                    System.arraycopy(arrayNum2, 0, arrayTemp16, 0, largoA);
+                                    int arrayTemp163[] = rotarArray(n);
+                                    System.out.print("el resultado de girar " + n + " posiciones el arreglo es de: ");
+                                    for (int i = 0; i < largoA; i++) {
+                                        System.out.print(arrayTemp163[i] + " ");
+                                    }
+                                    System.out.println("");
+                                    break;
+
+                                case 3:
+                                    System.arraycopy(arrayNum3, 0, arrayTemp16, 0, largoA);
+                                    int arrayTemp161[] = rotarArray(n);
+                                    System.out.print("el resultado de girar " + n + " posiciones el arreglo es de: ");
+                                    for (int i = 0; i < largoA; i++) {
+                                        System.out.print(arrayTemp161[i] + " ");
+                                    }
+                                    System.out.println("");
+                                    break;
+                            }
+                        } else {
+                            System.out.println("error, debe primero crear los arreglos en el punto 8");
+                        }
                         break;
                     case 17:
+                        limpiar();
+                        arrayTemp17 = new int[largoA];
+                        if (arrayCreado) {
+                            int seleccionA = 0;
+                            System.out.println("digite el numero de que arreglo desea ultilizar (Arreglo 1 = 1  Arreglo 2 = 2   Arreglo 3= 3)");
+                            seleccionA = lector.nextInt();
+                            switch (seleccionA) {
+                                case 1:
+                                    System.arraycopy(arrayNum1, 0, arrayTemp17, 0, largoA);
+                                    int arrayTemp172[] = ordenar();
+                                    System.out.print("el resultado de ordenar el arreglo es: ");
+                                    for (int i = 0; i < largoA; i++) {
+                                        System.out.print(arrayTemp172[i] + " ");
+                                    }
+                                    System.out.println("");
+                                    break;
 
+                                case 2:
+                                    System.arraycopy(arrayNum2, 0, arrayTemp17, 0, largoA);
+                                    int arrayTemp173[] = ordenar();
+                                    System.out.print("el resultado de ordenar el arreglo es: ");
+                                    for (int i = 0; i < largoA; i++) {
+                                        System.out.print(arrayTemp173[i] + " ");
+                                    }
+                                    System.out.println("");
+                                    break;
+
+                                case 3:
+                                    System.arraycopy(arrayNum3, 0, arrayTemp17, 0, largoA);
+                                    int arrayTemp171[] = ordenar();
+                                    System.out.print("el resultado de ordenar el arreglo es: ");
+                                    for (int i = 0; i < largoA; i++) {
+                                        System.out.print(arrayTemp171[i] + " ");
+                                    }
+                                    System.out.println("");
+                                    break;
+                            }
+                        } else {
+                            System.out.println("error, debe primero crear los arreglos en el punto 8");
+                        }
                         break;
                 }
             } else {
                 System.exit(0);
             }
 
+        }
+    }
+
+    /**
+     * this method orders an array, with the "bubble" method
+     * <b>pre:</b> The array is already initialized (is not null).<br>
+     * <b>post:</b> The array values ??have been ordered, from lowest to highest
+     * value.<br>
+     *
+     * @param array array!= null
+     * @return the orderly array.
+     */
+    public static int[] ordenar() {
+        int intercambio;
+        for (int i = 0; i < arrayTemp17.length - 1; i++) {
+            for (int j = 0; j < arrayTemp17.length - 1; j++) {
+                if (arrayTemp17[j] > arrayTemp17[j + 1]) {
+                    intercambio = arrayTemp17[j];
+                    arrayTemp17[j] = arrayTemp17[j + 1];
+                    arrayTemp17[j + 1] = intercambio;
+
+                }
+            }
+        }
+
+        return arrayTemp17;
+    }
+
+    /**
+     * this method orders an array moving "n" position the values
+     * <b>pre:</b> The array is already initialized (is not null).<br>
+     * <b>post:</b> The array values ??have been ordered runed "n"
+     * positions.<br>
+     *
+     * @param array array!= null
+     * @return
+     */
+    public static int[] rotarArray(int a) {
+        int ultimo = arrayTemp16[arrayTemp16.length - 1];
+        for (int i = 0; i < a; i++) {
+            ultimo = arrayTemp16[arrayTemp16.length - 1];
+            for (int j = arrayTemp16.length - 2; j >= 0; j--) {
+                arrayTemp16[j + 1] = arrayTemp16[j];
+            }
+            arrayTemp16[0] = ultimo;
+        }
+        return arrayTemp16;
+
+    }
+
+    /* public static double promedio() {
+        double promedioA = 0;
+        for (int i = 0; i < largoA; i++) {
+            promedioA = arrayTemp10[i] + promedioA;
+        }
+        promedioA = promedioA / largoA;
+        return promedioA;
+    }*/
+    /**
+     * this method create an array of the union of 3 arrays
+     * <b>pre:</b> The arrays is already initialized (is not null).<br>
+     * <b>post:</b> The array that contains the values of the 3 arrays.<br>
+     *
+     * @param array array!= null
+     * @return
+     */
+    public static void unirArray() {
+        for (int i = 0; i < largoA; i++) {
+            arrayResult[i] = Integer.toString(arrayNum1[i]);
+        }
+        for (int i = 0; i < largoA; i++) {
+            arrayResult[i + largoA] = Integer.toString(arrayNum2[i]);
+        }
+        for (int i = 0; i < largoA; i++) {
+            arrayResult[i + largoA] = Integer.toString(arrayNum3[i]);
+        }
+    }
+
+    /**
+     * this method create an array of the union of 2 arrays, without repeated
+     * values
+     * <b>pre:</b> The arrays is already initialized (is not null).<br>
+     * <b>post:</b> The array that contains the values of the 2 arrays, without
+     * repeated values.<br>
+     *
+     * @param array array!= null
+     * @return
+     */
+    public static void noRepetir() {
+        for (int i = 0; i < arrayResult.length; i++) {
+            for (int j = 0; j < arrayResult.length - 1; j++) {
+                if (i != j) {
+                    if (arrayResult[i].equals(arrayResult[j])) {
+                        // eliminamos su valor
+                        arrayResult[i] = "";
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * this method create an array of the union of 2 arrays, with repeated
+     * values
+     * <b>pre:</b> The arrays is already initialized (is not null).<br>
+     * <b>post:</b> The array that contains the values of the 2 arrays, with
+     * repeated values.<br>
+     *
+     * @param array array!= null
+     * @return
+     */
+    public static void siRepetir() {
+        for (int i = 0; i < arrayResult.length; i++) {
+            for (int j = 0; j < arrayResult.length - 1; j++) {
+                if (i != j) {
+                    if (arrayResult[i] != (arrayResult[j])) {
+                        // eliminamos su valor
+                        arrayResult[i] = "";
+                    }
+                }
+            }
         }
     }
 
